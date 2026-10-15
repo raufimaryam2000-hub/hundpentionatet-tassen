@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hundpensionatet Tassen</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Tassen</h1>
+        <nav>
+            <a href="#tjanster">Tjänster</a>
+            <a href="#oppettider">Öppettider</a>
+            <a href="#boka">Boka</a>
+            <a href="#omdomen">Omdömen</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="presentation">
+            <h2>Välkommen till Tassen</h2>
+            <p>Tassen är ett litet hunddagis och pensionat strax utanför stan. Vi är två hundskötare och har plats för tolv hundar, med ett stort inhägnat utomhusområde.</p>
+        </section>
+
+        <section id="tjanster">
+            <h2>Tjänster</h2>
+            <div class="tjanster-lista">
+                <article>
+                    <h3>Hunddagis heldag</h3>
+                    <p>Din hund är hos oss hela dagen och får leka och vila på det stora inhägnade området, med hundskötare på plats.</p>
+                    <p class="pris">320 kr</p>
+                </article>
+                <article>
+                    <h3>Hunddagis halvdag</h3>
+                    <p>Perfekt när du bara behöver några timmar.</p>
+                    <p class="pris">190 kr</p>
+                </article>
+                <article>
+                    <h3>Pensionat per natt</h3>
+                    <p>Din hund bor hos oss medan du är bortrest.</p>
+                    <p class="pris">450 kr</p>
+                </article>
+                <article>
+                    <h3>Klippkort 10 dagar</h3>
+                    <p>Tio dagisdagar till ett förmånligt pris.</p>
+                    <p class="pris">2 800 kr</p>
+                </article>
+                <article>
+                    <h3>Hämtning och lämning</h3>
+                    <p>Tillval: vi kan hämta och lämna din hund hemma hos dig om du inte har möjlighet att komma själv.</p>
+                    <p class="pris">150 kr</p>
+                </article>
+            </div>
+        </section>
+
+    <section id="oppettider">
+    <h2>Öppettider</h2>
+    <p id="datum"></p>
+    <p id="klocka"></p>
+    <p id="status"></p>
+    <ul>
+        <li>Måndag&ndash;fredag: 07&ndash;18</li>
+        <li>Lördag: 09&ndash;14</li>
+        <li>Söndag: stängt</li>
+    </ul>
+</section>
+
+        <section id="boka">
+            <h2>Boka</h2>
+            <p>Din förfrågan sparas i din webbläsare, vi ringer upp dig.</p>
+
+            <form id="boka-formular">
+        <label for="hund">Hundens namn</label>
+        <input type="text" id="hund">
+
+        <label for="datum-onskat">Önskat datum</label>
+        <input type="date" id="datum-onskat">
+
+        <button type="submit">Skicka förfrågan</button>
+    </form>
+
+    <p id="boka-fel"></p>
+
+    <h3>Dina förfrågningar</h3>
+    <ul id="boka-lista"></ul>
+</section>
+
+        <section id="omdomen">
+            <h2>Omdömen</h2>
+        </section>
+    </main>
+
+    <footer>
+        <p>Hagvägen 4</p>
+        <p>Telefon: 0300-12 34 56</p>
+        <p>E-post: hej@tassen.se</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>   
