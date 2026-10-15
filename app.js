@@ -61,14 +61,21 @@ function sparaBokningar() {
 
 function renderaBokningar() {
     bokaLista.innerHTML = "";
+
+    if (bokningar.length === 0) {
+        const tom = document.createElement("li");
+        tom.textContent = "Inga förfrågningar än.";
+        bokaLista.appendChild(tom);
+        return;
+    }
+
     bokningar.forEach(function (bokning) {
         const li = document.createElement("li");
         li.textContent = bokning.hund + " – " + bokning.datum;
         bokaLista.appendChild(li);
     });
-}
-
-renderaBokningar(); 
+} 
+renderaBokningar();
 
 const formular = document.getElementById("boka-formular");
 const hundInput = document.getElementById("hund");
