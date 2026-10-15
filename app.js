@@ -71,11 +71,31 @@ function renderaBokningar() {
 
     bokningar.forEach(function (bokning) {
         const li = document.createElement("li");
-        li.textContent = bokning.hund + " – " + bokning.datum;
+        li.textContent = bokning.hund + " - " + bokning.datum + " ";
+
+        const knapp = document.createElement("button");
+        knapp.type = "button";
+        knapp.textContent = "Avboka";
+        knapp.dataset.id = bokning.id;
+
+        li.appendChild(knapp);
         bokaLista.appendChild(li);
     });
-} 
+}
 renderaBokningar();
+
+bokaLista.addEventListener("click", function (event) {
+    if (event.target.tagName !== "BUTTON") {
+        return;
+    }
+
+    const id = Number(event.target.dataset.id);
+    bokningar = bokningar.filter(function (bokning) {
+        return bokning.id !== id;
+    });
+    sparaBokningar();
+    renderaBokningar(); 
+});
 
 const formular = document.getElementById("boka-formular");
 const hundInput = document.getElementById("hund");
