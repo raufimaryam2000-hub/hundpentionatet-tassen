@@ -45,10 +45,19 @@ setInterval(uppdateraKlocka, 1000);
 
 const bokaLista = document.getElementById("boka-lista");
 
-let bokningar = [
-    { id: 1, hund: "Bella", datum: "2026-10-20" },
-    { id: 2, hund: "Max", datum: "2026-10-22" }
-];
+function laddaBokningar() {
+    const sparad = localStorage.getItem("bokningar");
+    if (sparad === null) {
+        return [];
+    }
+    return JSON.parse(sparad);
+}
+
+let bokningar = laddaBokningar();
+
+function sparaBokningar() {
+    localStorage.setItem("bokningar", JSON.stringify(bokningar));
+}
 
 function renderaBokningar() {
     bokaLista.innerHTML = "";
@@ -60,5 +69,29 @@ function renderaBokningar() {
 }
 
 renderaBokningar(); 
- 
-   
+
+const formular = document.getElementById("boka-formular");
+const hundInput = document.getElementById("hund");
+const datumInput = document.getElementById("datum-onskat");
+const felElement = document.getElementById("boka-fel");
+
+formular.addEventListener("submit", function (event) {
+    event.preventDefault();
+    
+    const hund = hundInput.value.trim();
+    const datum = datumInput.value;
+
+    if (hund === "" || datum === "") {
+        felElement.textContent = "Fyll i både hundens namn och önskat datum.";
+        return;
+    }
+
+        felElement.textContent = "";
+
+    bokningar.push({ id: Date.now(), hund: hund, datum: datum });
+    sparaBokningar();
+    renderaBokningar();
+    formular.reset();
+});   
+
+    
