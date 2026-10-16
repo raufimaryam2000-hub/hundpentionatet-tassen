@@ -1,4 +1,35 @@
 // console.log("app.js fungerar!");
+class Bokningslista {
+    constructor() {
+        this.bokningar = this.ladda();
+    }
+
+    ladda() {
+        const sparad = localStorage.getItem("bokningar");
+        if (sparad === null) {
+            return [];
+        }
+        return JSON.parse(sparad);
+    }
+    spara() {
+        localStorage.setItem("bokningar", JSON.stringify(this.bokningar));
+    }
+    
+    laggTill(hund, datum) {
+        this.bokningar.push({ id: Date.now(), hund: hund, datum: datum });
+        this.spara();
+     }
+        
+        taBort(id) {
+        this.bokningar = this.bokningar.filter(function (bokning) {
+            return bokning.id !== id;
+        });
+        this.spara();
+    }
+} 
+
+const bokningslista = new Bokningslista();
+
 const klockaElement = document.getElementById("klocka");
 const datumElement = document.getElementById("datum");
 const statusElement = document.getElementById("status");
@@ -45,31 +76,18 @@ setInterval(uppdateraKlocka, 1000);
 
 const bokaLista = document.getElementById("boka-lista");
 
-function laddaBokningar() {
-    const sparad = localStorage.getItem("bokningar");
-    if (sparad === null) {
-        return [];
-    }
-    return JSON.parse(sparad);
-}
-
-let bokningar = laddaBokningar();
-
-function sparaBokningar() {
-    localStorage.setItem("bokningar", JSON.stringify(bokningar));
-}
 
 function renderaBokningar() {
     bokaLista.innerHTML = "";
 
-    if (bokningar.length === 0) {
+    if (bokningslista.bokningar.length === 0) {
         const tom = document.createElement("li");
         tom.textContent = "Inga förfrågningar än.";
         bokaLista.appendChild(tom);
         return;
     }
 
-    bokningar.forEach(function (bokning) {
+    bokningslista.bokningar.forEach(function (bokning) {
         const li = document.createElement("li");
         li.textContent = bokning.hund + " - " + bokning.datum + " ";
 
@@ -80,7 +98,7 @@ function renderaBokningar() {
 
         li.appendChild(knapp);
         bokaLista.appendChild(li);
-    });
+    }); 
 }
 renderaBokningar();
 
@@ -90,11 +108,8 @@ bokaLista.addEventListener("click", function (event) {
     }
 
     const id = Number(event.target.dataset.id);
-    bokningar = bokningar.filter(function (bokning) {
-        return bokning.id !== id;
-    });
-    sparaBokningar();
-    renderaBokningar(); 
+    bokningslista.taBort(id);
+    renderaBokningar();
 });
 
 const formular = document.getElementById("boka-formular");
@@ -102,9 +117,9 @@ const hundInput = document.getElementById("hund");
 const datumInput = document.getElementById("datum-onskat");
 const felElement = document.getElementById("boka-fel");
 
-formular.addEventListener("submit", function (event) {
+  formular.addEventListener("submit", function (event) {
     event.preventDefault();
-    
+
     const hund = hundInput.value.trim();
     const datum = datumInput.value;
 
@@ -113,12 +128,9 @@ formular.addEventListener("submit", function (event) {
         return;
     }
 
-        felElement.textContent = "";
+    felElement.textContent = "";
 
-    bokningar.push({ id: Date.now(), hund: hund, datum: datum });
-    sparaBokningar();
+    bokningslista.laggTill(hund, datum);
     renderaBokningar();
     formular.reset();
-});   
-
-    
+});     
