@@ -134,3 +134,35 @@ const felElement = document.getElementById("boka-fel");
     renderaBokningar();
     formular.reset();
 });     
+
+const omdomen = [
+    { text: "Vår hund älskar att komma hit varje morgon.", person: "Anna" },
+    { text: "Trygg och omtänksam personal, vi lämnar henne utan oro.", person: "Johan" },
+    { text: "Perfekt pensionat när vi var bortresta en vecka.", person: "Sara" },
+    { text: "Det stora området gör att hunden kommer hem nöjd och trött.", person: "Karim" },
+    { text: "Enkelt att boka och alltid ett vänligt bemötande.", person: "Lena" }
+];   
+
+const omdomeText = document.getElementById("omdome-text");
+const omdomePerson = document.getElementById("omdome-person");
+
+function visaOmdome(omdome) {
+    omdomeText.textContent = omdome.text;
+    omdomePerson.textContent = " - " + omdome.person;
+}
+
+visaOmdome(omdomen[0]); 
+
+const omdomeKnapp = document.getElementById("omdome-knapp");
+let senasteIndex = 0;
+
+omdomeKnapp.addEventListener("click", function () {
+    let nyttIndex = Math.floor(Math.random() * omdomen.length);
+
+    while (nyttIndex === senasteIndex) {
+        nyttIndex = Math.floor(Math.random() * omdomen.length);
+    }
+
+    senasteIndex = nyttIndex;
+    visaOmdome(omdomen[nyttIndex]);
+});  

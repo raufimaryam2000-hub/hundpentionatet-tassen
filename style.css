@@ -23,7 +23,7 @@ header h1 {
 nav a {
     color: white;  
 }  
-
+  
 main { 
     max-width: 900px;
     margin: 0 auto;
@@ -60,7 +60,7 @@ footer {
 
 nav {
     display: flex;
-    gap: 1rem;
+    gap: 1rem;  
     flex-wrap: wrap;
 }
 
